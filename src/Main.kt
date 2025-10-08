@@ -103,6 +103,21 @@ private fun getCommonLetters(str1 : String, str2 : String) : Triple<Pair<String,
     )
 }
 
+//Функции задачи 9
+
+private fun slogSplit(str : String) : String {
+    var res = ""
+    var glasnie = arrayOf('а', 'е', 'ё', 'и', 'о', 'у', 'ы', 'э', 'ю', 'я')
+
+    for (i in 0..str.count()-1) {
+        res+=str[i]
+        if (str[i] in glasnie && i < str.count()-1 && str[i+1] !in glasnie) {
+            res+="-"
+        }
+    }
+    return res
+}
+
 fun main() {
     //Задача 5
 
@@ -139,5 +154,18 @@ fun main() {
 
     println("Задача 8: Поиск максимального пересечения букв")
     val mainList3 = listOf("программа", "грамм", "алгоритм", "мама", "папа", "рамка")
-    print(getMaxCommon(mainList3))
+    println(getMaxCommon(mainList3))
+
+    //Задача 9
+
+    /*
+     Разбейте слова на слоги по упрощенным правилам:
+     Слог обычно начинается с согласной и заканчивается гласной.
+     Делал упрощенную систему как и сказано в задании
+    */
+
+    println("Задача 9: Разбиение на слоги по правилам")
+    print("Введение сообщение: ")
+    var msg2 = readln()
+    print(slogSplit(msg2))
 }
