@@ -44,6 +44,21 @@ private fun createChains(list : MutableList<String>) : List<List<String>>{
     return res
 }
 
+//Функции задачи 7
+
+private fun codeStr(str : String) : String{
+    var res = ""
+    var counter = 0
+    var templateTable : MutableMap<Char,Int> = mutableMapOf()
+
+    for (char in str) {
+        if (char !in templateTable) {templateTable[char] = counter; counter++}
+        res += templateTable[char]
+    }
+
+    return res
+}
+
 fun main() {
     //Задача 5
 
@@ -69,4 +84,10 @@ fun main() {
     val mainList2 = mutableListOf("кот","торт","рот","ток")
     var result2 = createChains(mainList2)
     result2.forEachIndexed { index, chain -> println("Цепочка ${index+1}: $chain") }
+
+    //Задача 7
+    println("Задача 7: Кодирование слов по шаблонам")
+    print("Введите сообщение: ")
+    var msg = readln()
+    println("Закодированное сообщение: ${codeStr(msg)}")
 }
