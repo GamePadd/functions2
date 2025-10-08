@@ -59,6 +59,50 @@ private fun codeStr(str : String) : String{
     return res
 }
 
+//Функции задачи 8
+
+private fun getMaxCommon(list : List<String>) : Triple<Pair<String,String>, Int, List<Char>>{
+    var res : MutableList<Triple<Pair<String,String>, Int, List<Char>>> = mutableListOf()
+    for (i in 0..list.count()-1) {
+        var currentWord = list[i]
+
+        for (j in 0..list.count()-1) {
+            var secondWord = ""
+            var count = 0
+            var commonChars : MutableList<Char> = mutableListOf()
+            if (i != j) {
+                secondWord = list[j]
+                //Сюда вернуть трипл со значениями
+                //и тут же res.add
+                res.add(getCommonLetters(currentWord,secondWord))
+            }
+        }
+    }
+
+    res.sortByDescending { it.second }
+    return res[0]
+}
+
+private fun getCommonLetters(str1 : String, str2 : String) : Triple<Pair<String,String>, Int, List<Char>>{
+    var cmn : MutableList<Char> = mutableListOf()
+    var count = 0
+
+    var str1Chars = str1.toCharArray()
+
+    for (char in str2) {
+        if(char in str1Chars) {
+            count++
+            cmn.add(char)
+        }
+    }
+
+    return Triple(
+        Pair(str1,str2),
+        count,
+        cmn
+    )
+}
+
 fun main() {
     //Задача 5
 
@@ -90,4 +134,10 @@ fun main() {
     print("Введите сообщение: ")
     var msg = readln()
     println("Закодированное сообщение: ${codeStr(msg)}")
+
+    //Задача 8
+
+    println("Задача 8: Поиск максимального пересечения букв")
+    val mainList3 = listOf("программа", "грамм", "алгоритм", "мама", "папа", "рамка")
+    print(getMaxCommon(mainList3))
 }
